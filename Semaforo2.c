@@ -3,25 +3,26 @@
 #include "pico/time.h"
 #include "hardware/clocks.h"
 
+//GPIOs
 #define led_red 13
 #define led_blue 12
 #define led_green 11
 #define botao_a 5
 
 void componentes();
-
+//Callback para troca de estados
 int64_t turn_off_callback(alarm_id_t id, void *user_data){
     if (gpio_get(led_red)==1 && gpio_get(led_blue)==1 && gpio_get(led_green)==1){
-      gpio_put(led_red, false);
+      gpio_put(led_red, false); //Apaga LED vermelho
     }
     else if (gpio_get(led_red)==0 && gpio_get(led_blue)==1 && gpio_get(led_green)==1){
-      gpio_put(led_red, false);
-      gpio_put(led_green, false);
+      gpio_put(led_red, false); //Apaga LED vermelho
+      gpio_put(led_green, false); //Apaga LED verde
     }
     else if (gpio_get(led_red)==0 && gpio_get(led_blue)==1 && gpio_get(led_green)==0){
-      gpio_put(led_red, false);
-      gpio_put(led_green, false);
-      gpio_put(led_blue, false);
+      gpio_put(led_red, false); //Apaga LED vermelho
+      gpio_put(led_green, false); //Apaga LED verde
+      gpio_put(led_blue, false); //Apaga LED azul
     }
   return 0;
 }
@@ -45,7 +46,6 @@ int main(){
     }
     return 0;
 }
-
 //Inicialização de LEDs
 void componentes(){
     gpio_init(led_red);
